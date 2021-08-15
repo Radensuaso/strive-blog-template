@@ -3,6 +3,7 @@ import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { Container, Form, Button } from "react-bootstrap";
 import "./styles.css";
+import { submitBlogPost } from "../../utils/axiosTools";
 export default class NewBlogPost extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,8 @@ export default class NewBlogPost extends Component {
         content: "",
       },
     };
-    this.handleChange = this.handleQuillChange.bind(this);
+    this.handleQuillChange = this.handleQuillChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleQuillChange = (value) => {
@@ -27,7 +29,10 @@ export default class NewBlogPost extends Component {
   render() {
     return (
       <Container className="new-blog-container">
-        <Form className="mt-5">
+        <Form
+          className="mt-5"
+          onSubmit={() => submitBlogPost(this.state.blogPost)}
+        >
           <Form.Group controlId="blog-form" className="mt-3">
             <Form.Label>Title</Form.Label>
             <Form.Control
