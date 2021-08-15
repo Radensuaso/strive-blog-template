@@ -6,13 +6,23 @@ import "./styles.css";
 export default class NewBlogPost extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: "" };
-    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      blogPost: {
+        category: "Jobs",
+        title: "",
+        content: "",
+      },
+    };
+    this.handleChange = this.handleQuillChange.bind(this);
   }
 
-  handleChange(value) {
-    this.setState({ text: value });
-  }
+  handleQuillChange = (value) => {
+    this.setState({ blogPost: { ...this.state.blogPost, content: value } });
+  };
+
+  handleChange = (key, value) => {
+    this.setState({ blogPost: { ...this.state.blogPost, [key]: value } });
+  };
 
   render() {
     return (
@@ -20,23 +30,33 @@ export default class NewBlogPost extends Component {
         <Form className="mt-5">
           <Form.Group controlId="blog-form" className="mt-3">
             <Form.Label>Title</Form.Label>
-            <Form.Control size="lg" placeholder="Title" />
+            <Form.Control
+              size="lg"
+              placeholder="Title"
+              value={this.state.blogPost.title}
+              onChange={(e) => this.handleChange("title", e.target.value)}
+            />
           </Form.Group>
           <Form.Group controlId="blog-category" className="mt-3">
             <Form.Label>Category</Form.Label>
-            <Form.Control size="lg" as="select">
-              <option>Category1</option>
-              <option>Category2</option>
-              <option>Category3</option>
-              <option>Category4</option>
-              <option>Category5</option>
+            <Form.Control
+              size="lg"
+              as="select"
+              value={this.state.blogPost.category}
+              onChange={(e) => this.handleChange("category", e.target.value)}
+            >
+              <option>Jobs</option>
+              <option>Motivational</option>
+              <option>Accomplishments</option>
+              <option>React</option>
+              <option>Node.js</option>
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="blog-content" className="mt-3">
             <Form.Label>Blog Content</Form.Label>
             <ReactQuill
-              value={this.state.text}
-              onChange={this.handleChange}
+              value={this.state.blogPost.content}
+              onChange={this.handleQuillChange}
               className="new-blog-content"
             />
           </Form.Group>
