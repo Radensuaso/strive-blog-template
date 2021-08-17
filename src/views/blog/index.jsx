@@ -3,7 +3,7 @@ import { Container, Image } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import "./styles.css";
-import { getBlogPosts } from "../../utils/axiosTools";
+import axios from "axios";
 /* import posts from "../../data/posts.json"; */
 class Blog extends Component {
   state = {
@@ -11,15 +11,24 @@ class Blog extends Component {
     loading: true,
   };
 
+  getBlogPost = async (id) => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BE_URL}/blogPosts/${id}`
+      );
+      const blogPost = res.data;
+      console.log(blogPost);
+      return blogPost;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   componentDidMount = async () => {
     const { id } = this.props.match.params;
-    const blogPosts = await getBlogPosts();
-    const blog = blogPosts.find((post) => post._id.toString() === id);
-    if (blog) {
-      this.setState({ blog, loading: false });
-    } else {
-      this.props.history.push("/404");
-    }
+    const blog = await this.getBlogPost(id);
+    this.setState({ blog, loading: false });
   };
 
   render() {
