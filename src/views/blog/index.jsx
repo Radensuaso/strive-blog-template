@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Image } from "react-bootstrap";
+import { Container, Image, Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 import "./styles.css";
@@ -36,11 +36,15 @@ class Blog extends Component {
       return (
         <div className="blog-details-root">
           <Container>
-            <a
-              href={`${process.env.REACT_APP_BE_URL}/blogPosts/${blog._id}/downloadPDF`}
-            >
-              <Image className="blog-details-cover" src={blog.cover} fluid />
-            </a>
+            <Image className="blog-details-cover" src={blog.cover} fluid />
+            <div className="d-flex justify-content-end">
+              <Button
+                href={`${process.env.REACT_APP_BE_URL}/blogPosts/${blog._id}/downloadPDF`}
+                variant="dark"
+              >
+                Download PDF
+              </Button>
+            </div>
             <h1 className="blog-details-title">{blog.title}</h1>
 
             <div className="blog-details-container">
