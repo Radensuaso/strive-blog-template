@@ -11,10 +11,10 @@ export default class BlogList extends Component {
 
   getBlogPosts = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_BE_URL}/blogPosts/`);
-      const blogPosts = res.data;
-      console.log(blogPosts);
-      return blogPosts;
+      const { data: blogPosts } = await axios.get(
+        `${process.env.REACT_APP_BE_URL}/blogPosts/`
+      );
+      this.setState({ blogPosts, loading: false });
     } catch (error) {
       console.log(error);
       return error;
@@ -22,8 +22,7 @@ export default class BlogList extends Component {
   };
 
   componentDidMount = async () => {
-    const blogPosts = await this.getBlogPosts();
-    this.setState({ blogPosts, loading: false });
+    this.getBlogPosts();
   };
 
   render() {

@@ -11,14 +11,13 @@ class Blog extends Component {
     loading: true,
   };
 
-  getBlogPost = async (id) => {
+  getBlogPost = async () => {
     try {
-      const res = await axios.get(
+      const { id } = this.props.match.params;
+      const { data: blog } = await axios.get(
         `${process.env.REACT_APP_BE_URL}/blogPosts/${id}`
       );
-      const blogPost = res.data;
-      console.log(blogPost);
-      return blogPost;
+      this.setState({ blog, loading: false });
     } catch (error) {
       console.log(error);
       return error;
@@ -26,9 +25,7 @@ class Blog extends Component {
   };
 
   componentDidMount = async () => {
-    const { id } = this.props.match.params;
-    const blog = await this.getBlogPost(id);
-    this.setState({ blog, loading: false });
+    this.getBlogPost();
   };
 
   render() {
