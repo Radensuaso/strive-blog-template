@@ -36,7 +36,9 @@ class Blog extends Component {
       return (
         <div className="blog-details-root">
           <Container>
-            <Image className="blog-details-cover" src={blog.cover} fluid />
+            <a href={`http://localhost:3001/blogPosts/${blog._id}/downloadPDF`}>
+              <Image className="blog-details-cover" src={blog.cover} fluid />
+            </a>
             <h1 className="blog-details-title">{blog.title}</h1>
 
             <div className="blog-details-container">
