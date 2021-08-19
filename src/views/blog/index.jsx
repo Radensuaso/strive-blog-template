@@ -38,12 +38,22 @@ class Blog extends Component {
           <Container>
             <Image className="blog-details-cover" src={blog.cover} fluid />
             <div className="d-flex justify-content-end">
-              <Button
-                href={`${process.env.REACT_APP_BE_URL}/blogPosts/${blog._id}/downloadPDF`}
-                variant="dark"
-              >
-                Download PDF
-              </Button>
+              <div className="d-flex flex-column">
+                <Button
+                  className="mb-4"
+                  href={`${process.env.REACT_APP_BE_URL}/blogPosts/${blog._id}/downloadPDF`}
+                  variant="dark"
+                >
+                  Download PDF
+                </Button>
+                <Button
+                  href={`${process.env.REACT_APP_BE_URL}/blogPosts/${blog._id}/sendEmail`}
+                  target="_blank"
+                  variant="light"
+                >
+                  Send me an email
+                </Button>
+              </div>
             </div>
             <h1 className="blog-details-title">{blog.title}</h1>
 
