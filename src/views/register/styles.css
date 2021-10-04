@@ -1,0 +1,11 @@
+.register-form {
+  margin-top: 150px;
+}
+
+.register-form .col-12 {
+  padding: 50px;
+  background-color: white;
+  -webkit-box-shadow: 2px 0px 18px 1px rgba(222, 222, 222, 1);
+  -moz-box-shadow: 2px 0px 18px 1px rgba(222, 222, 222, 1);
+  box-shadow: 2px 0px 4px 1px rgba(222, 222, 222, 1);
+}
